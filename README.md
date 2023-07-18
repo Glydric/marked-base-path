@@ -1,19 +1,18 @@
-# marked-base-url
+# marked-base-path
 
 Prefix relative url with base url.
 
 # Usage
 
 ```js
-import {marked} from "marked";
-import {baseUrl} from "marked-base-url";
+import { marked } from "marked";
+import { baseUrl } from "marked-base-path";
 
-// or UMD script
-// <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
-// <script src="https://cdn.jsdelivr.net/npm/marked-base-url/lib/index.umd.js"></script>
+//or 
+//
+// const basePath = require("marked-base-path")
 
-marked.use(baseUrl("https://example.com/folder/"));
+marked.use(basePath("/your/absolute/path"));
 
 marked.parse("[my url](./relative/path)");
-// <p><a href="https://example.com/folder/relative/path">my url</a></p>
 ```

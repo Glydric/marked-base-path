@@ -1,7 +1,7 @@
 {
-  "name": "marked-base-url",
+  "name": "marked-base-path",
   "version": "1.0.2",
-  "description": "marked base url",
+  "description": "marked base path",
   "main": "./lib/index.cjs",
   "module": "./src/index.js",
   "browser": "./lib/index.umd.js",
