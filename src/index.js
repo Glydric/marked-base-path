@@ -1,6 +1,6 @@
 const path = require("path")
 
-export function baseUrl(base) {
+export function basePath(base) {
     base = base.trim().replace(/\/+$/, '/')
     
     return {
