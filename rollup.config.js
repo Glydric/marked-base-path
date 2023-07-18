@@ -2,7 +2,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      name: 'markedBaseUrl',
+      name: 'markedbasePath',
       file: 'lib/index.umd.js',
       format: 'umd',
       globals: {

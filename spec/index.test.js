@@ -1,7 +1,7 @@
 import { marked } from 'marked';
-import { baseUrl } from '../src/index.js';
+import { basePath } from '../src/index.js';
 
-describe('baseUrl', () => {
+describe('basePath', () => {
   beforeEach(() => {
     const opts = marked.getDefaults();
     opts.mangle = false; // to temporarily disable the warning message
@@ -10,7 +10,7 @@ describe('baseUrl', () => {
   });
 
   test('domain vs locally absolute path', () => {
-    marked.use(baseUrl('https://example.com/'));
+    marked.use(basePath('https://example.com/'));
     expect(marked.parse('[my url](/relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -18,7 +18,7 @@ describe('baseUrl', () => {
   });
 
   test('domain vs relative path bare', () => {
-    marked.use(baseUrl('https://example.com/'));
+    marked.use(basePath('https://example.com/'));
     expect(marked.parse('[my url](relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -26,7 +26,7 @@ describe('baseUrl', () => {
   });
 
   test('domain vs relative path', () => {
-    marked.use(baseUrl('https://example.com/'));
+    marked.use(basePath('https://example.com/'));
     expect(marked.parse('[my url](./relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -34,7 +34,7 @@ describe('baseUrl', () => {
   });
 
   test('domain without trailing slash vs locally absolute path', () => {
-    marked.use(baseUrl('https://example.com'));
+    marked.use(basePath('https://example.com'));
     expect(marked.parse('[my url](/relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -42,7 +42,7 @@ describe('baseUrl', () => {
   });
 
   test('domain without trailing slash vs relative path bare', () => {
-    marked.use(baseUrl('https://example.com'));
+    marked.use(basePath('https://example.com'));
     expect(marked.parse('[my url](relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -50,7 +50,7 @@ describe('baseUrl', () => {
   });
 
   test('domain without trailing slash vs relative path', () => {
-    marked.use(baseUrl('https://example.com'));
+    marked.use(basePath('https://example.com'));
     expect(marked.parse('[my url](./relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -58,7 +58,7 @@ describe('baseUrl', () => {
   });
 
   test('absolute path', () => {
-    marked.use(baseUrl('https://example.com/'));
+    marked.use(basePath('https://example.com/'));
     expect(marked.parse('[my url](https://example.org/absolute)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.org/absolute">my url</a></p>
 "
@@ -66,7 +66,7 @@ describe('baseUrl', () => {
   });
 
   test('domain folder base vs locally absolute path', () => {
-    marked.use(baseUrl('https://example.com/folder'));
+    marked.use(basePath('https://example.com/folder'));
     expect(marked.parse('[my url](/relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -74,7 +74,7 @@ describe('baseUrl', () => {
   });
 
   test('domain folder base trailing slash vs locally absolute path', () => {
-    marked.use(baseUrl('https://example.com/folder/'));
+    marked.use(basePath('https://example.com/folder/'));
     expect(marked.parse('[my url](/relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -82,7 +82,7 @@ describe('baseUrl', () => {
   });
 
   test('domain file vs relative path', () => {
-    marked.use(baseUrl('https://example.com/file.html'));
+    marked.use(basePath('https://example.com/file.html'));
     expect(marked.parse('[my url](./relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/relative">my url</a></p>
 "
@@ -90,7 +90,7 @@ describe('baseUrl', () => {
   });
 
   test('domain folder trailing slash vs relative path', () => {
-    marked.use(baseUrl('https://example.com/folder/'));
+    marked.use(basePath('https://example.com/folder/'));
     expect(marked.parse('[my url](./relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/folder/relative">my url</a></p>
 "
@@ -98,47 +98,47 @@ describe('baseUrl', () => {
   });
 
   test('domain folder trailing slash vs relative path bare', () => {
-    marked.use(baseUrl('https://example.com/folder/'));
+    marked.use(basePath('https://example.com/folder/'));
     expect(marked.parse('[my url](relative)')).toMatchInlineSnapshot(`
 "<p><a href="https://example.com/folder/relative">my url</a></p>
 "
 `);
   });
 
-  test('relative baseUrl vs relative path', () => {
-    marked.use(baseUrl('folder/file.html'));
+  test('relative basePath vs relative path', () => {
+    marked.use(basePath('folder/file.html'));
     expect(marked.parse('[my url](relative)')).toMatchInlineSnapshot(`
 "<p><a href="folder/relative">my url</a></p>
 "
 `);
   });
 
-  test('locally absolute baseUrl vs relative path', () => {
-    marked.use(baseUrl('/folder/file.html'));
+  test('locally absolute basePath vs relative path', () => {
+    marked.use(basePath('/folder/file.html'));
     expect(marked.parse('[my url](./relative)')).toMatchInlineSnapshot(`
 "<p><a href="/folder/relative">my url</a></p>
 "
 `);
   });
 
-  test('relative baseUrl vs locally absolute path', () => {
-    marked.use(baseUrl('folder'));
+  test('relative basePath vs locally absolute path', () => {
+    marked.use(basePath('folder'));
     expect(marked.parse('[my url](/relative)')).toMatchInlineSnapshot(`
 "<p><a href="/relative">my url</a></p>
 "
 `);
   });
 
-  test('unchanged as baseUrl is not a folder', () => {
-    marked.use(baseUrl('folder'));
+  test('unchanged as basePath is not a folder', () => {
+    marked.use(basePath('folder'));
     expect(marked.parse('[my url](relative)')).toMatchInlineSnapshot(`
 "<p><a href="relative">my url</a></p>
 "
 `);
   });
 
-  test('locally absolute baseUrl vs locally absolute path', () => {
-    marked.use(baseUrl('/folder'));
+  test('locally absolute basePath vs locally absolute path', () => {
+    marked.use(basePath('/folder'));
     expect(marked.parse('[my url](/relative)')).toMatchInlineSnapshot(`
 "<p><a href="/relative">my url</a></p>
 "
@@ -146,7 +146,7 @@ describe('baseUrl', () => {
   });
 
   test('absolute url, jump up', () => {
-    marked.use(baseUrl('http://example.com/a/b/c/'));
+    marked.use(basePath('http://example.com/a/b/c/'));
     expect(marked.parse('[my url](../relative)')).toMatchInlineSnapshot(`
 "<p><a href="http://example.com/a/b/relative">my url</a></p>
 "
@@ -154,7 +154,7 @@ describe('baseUrl', () => {
   });
 
   test('locally absolute url, jump up', () => {
-    marked.use(baseUrl('/a/b/c/'));
+    marked.use(basePath('/a/b/c/'));
     expect(marked.parse('[my url](../relative)')).toMatchInlineSnapshot(`
 "<p><a href="/a/b/relative">my url</a></p>
 "

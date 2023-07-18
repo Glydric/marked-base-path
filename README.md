@@ -6,7 +6,7 @@ Prefix relative url with base url.
 
 ```js
 import { marked } from "marked";
-import { baseUrl } from "marked-base-path";
+import { basePath } from "marked-base-path";
 
 //or 
 //

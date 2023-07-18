@@ -1,4 +1,4 @@
-const path = require("path")
+import path from "path"
 
 export function basePath(base) {
     base = base.trim().replace(/\/+$/, '/')
